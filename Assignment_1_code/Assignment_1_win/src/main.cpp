@@ -211,7 +211,9 @@ void SetMeshColor(int &colorID)
 // TODO: insert your code in this function for Mesh Transformation (Rotation)
 void RotateModel(float angle, glm::vec3 axis)
 {
-    
+    // camera target stay constant. camera position rotates 
+    modelMatrix = glm::rotate(modelMatrix, angle, axis);
+
 }
 
 // TODO: insert your code in this function for Mesh Transformation (Translation)
