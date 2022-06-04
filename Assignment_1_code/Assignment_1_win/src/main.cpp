@@ -149,7 +149,6 @@ int LoadInput(vector<float> &verList, vector<unsigned> &triList)
     }
 
     
-    
     // convert strings to vectors
     stringToVector(vStr, ' ', vList, 'f');
     stringToVector(vnStr, ' ', vnList, 'f');
@@ -159,7 +158,7 @@ int LoadInput(vector<float> &verList, vector<unsigned> &triList)
     // constructing verList
     // traverse vList
     for (int i = 0; i < vList.size(); i = i + 3) {
-        if (i % 500 == 0) {
+        if (i % 5000 == 0) {
             string index = std::to_string(i);
             cout << "now on vertex no. " + index << endl;
         }
@@ -183,7 +182,7 @@ int LoadInput(vector<float> &verList, vector<unsigned> &triList)
     // constructing triList
     // traverse fList
     for (int i = 0; i < fList.size(); i = i + 3) {
-        triList.push_back(fList[i]);
+        triList.push_back(fList[i] - 1);
     }
 
 
