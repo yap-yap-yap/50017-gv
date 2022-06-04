@@ -213,7 +213,11 @@ void RotateModel(float angle, glm::vec3 axis)
 // TODO: insert your code in this function for Mesh Transformation (Translation)
 void TranslateModel(glm::vec3 transVec)
 {
-
+    // the camera moves along the plane of the screen without changing how it is looking at the object, so both position & target change equally.
+    camera_position[0] -= transVec[0];
+    camera_position[1] -= transVec[1];
+    camera_target[0] -= transVec[0];
+    camera_target[1] -= transVec[1];
 }
 
 // TODO: insert your code in this function for Mesh Transformation (Scaling)
