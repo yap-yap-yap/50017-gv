@@ -128,25 +128,29 @@ int LoadInput(vector<float> &verList, vector<unsigned> &triList)
     vector<unsigned> fList;
 
     string line;
-    ifstream objFile("./data/mickey.obj");
+    ifstream objFile("./data/garg.obj");
     // split file into strings of vertices, vertex normals and faces.
     while (getline(objFile, line)) {
         if (line[0] == 'f' && line[1] == ' ') {
+            
+            // replace backslash with space
+            int pos = line.find("/");
+            while (pos != string::npos) {
+                line.replace(pos, 1, " ");
+                pos = line.find("/");
+            }
             fStr = fStr + line.substr(2) + ' ';
         }
+
         else if (line[0] == 'v' && line[1] == 'n') {
             vnStr = vnStr + line.substr(3) + ' ';
         }
+
         else if (line[0] == 'v' && line[1] == ' ') {
             vStr = vStr + line.substr(2) + ' ';
         }
     }
-    // further split fStr by backslash
-    int pos = fStr.find("/");
-    while (pos != string::npos) {
-        fStr.replace(pos, 1, " ");
-        pos = fStr.find("/");
-    }
+    
 
     
     // convert strings to vectors
