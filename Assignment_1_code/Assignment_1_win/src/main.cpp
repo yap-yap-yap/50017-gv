@@ -128,7 +128,7 @@ int LoadInput(vector<float> &verList, vector<unsigned> &triList)
     vector<unsigned> fList;
 
     string line;
-    ifstream objFile("./data/garg.obj");
+    ifstream objFile("./data/mickey.obj");
     // split file into strings of vertices, vertex normals and faces.
     while (getline(objFile, line)) {
         if (line[0] == 'f' && line[1] == ' ') {
@@ -227,7 +227,8 @@ void TranslateModel(glm::vec3 transVec)
 // TODO: insert your code in this function for Mesh Transformation (Scaling)
 void ScaleModel(float scale)
 {
-    
+    // the z coordinate of the camera position has to change aka move along the axis between camera position and target
+    camera_position *= scale;
 }
 
 
