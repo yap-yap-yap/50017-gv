@@ -174,7 +174,11 @@ void SkeletalModel::computeBoneTransforms(Joint* joint, MatrixStack matrixStack)
 // TODO: Set the rotation part of the joint's transformation matrix based on the passed in Euler angles.
 void SkeletalModel::setJointTransform(int jointIndex, float angleX, float angleY, float angleZ)
 {
+    glm::mat4 rotateX = glm::rotate(glm::mat4(1.0f), glm::radians(angleX), glm::vec3(1.0f, 0.0f, 0.0f));
+    glm::mat4 rotateY = glm::rotate(glm::mat4(1.0f), glm::radians(angleY), glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(angleZ), glm::vec3(0.0f, 0.0f, 1.0f));
 
+    m_joints[jointIndex]->transform = m_joints[jointIndex]->transform * rotateX * rotateY * rotateZ;
 }
 
 
