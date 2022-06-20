@@ -119,9 +119,49 @@ void SkeletalModel::computeBoneTransforms( )
 }
 
 // TODO: You will need to implement this recursive helper function to traverse the joint hierarchy for computing transformations of the bones
+// done using current joint to children (rather than current to parent) because that feels simpler, since you can access children for each joint and get their transformation
 void SkeletalModel::computeBoneTransforms(Joint* joint, MatrixStack matrixStack)
 {
-  
+    matrixStack.push(joint->transform);
+
+
+    if (joint->children.size() != 0) {
+        for (int i = 0; i < joint->children.size(); i++) {
+            Joint* child_joint = joint->children[i];
+            glm::vec3 child_vec = glm::vec3(child_joint->transform[0][3], child_joint->transform[1][3], child_joint->transform[2][3]); // for calculing distance from current joint to child joint
+            
+            glm::vec3 z_axis = glm::normalize(child_vec);
+            glm::vec3 y_axis = glm::normalize(glm::cross(z_axis, glm::vec3(0.0f, 0.0f, 1.0f)));
+            glm::vec3 x_axis = glm::normalize(glm::cross(y_axis, z_axis));
+
+            glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.25f, 0.25f, 0.5f));
+            glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.01f, 0.01f, glm::length(child_vec)));
+            glm::mat4 rotate = glm::mat4(
+                x_axis[0], x_axis[1], x_axis[2], 0.0f,
+                y_axis[0], y_axis[1], y_axis[2], 0.0f,
+                z_axis[0], z_axis[1], z_axis[2], 0.0f,
+                0.0f, 0.0f, 0.0f, 1.0f
+            );
+
+
+            // push the transforms into the matrix stack to compute the full matrix via matrixStack.top()
+            /*matrixStack.push(translate);
+            matrixStack.push(scale);
+            matrixStack.push(rotate);*/
+
+            glm::mat4 transform = glm::transpose(rotate * scale * translate); // glm matrices are column first
+            matrixStack.push(transform);
+            boneMatList.push_back(matrixStack.top());
+            matrixStack.pop();
+            /*matrixStack.pop();
+            matrixStack.pop();*/
+
+            computeBoneTransforms(joint->children[i], matrixStack);
+        }
+    }
+
+   
+    matrixStack.pop();
 }
 
 
