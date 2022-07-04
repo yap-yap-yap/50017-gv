@@ -100,21 +100,34 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 //// TODO: fill this function to realize plane mapping
 void calcPlaneMapping(void)
 {
+    for (int i = 0; i < myObject.vertices.size(); i++) {
+        myObject.vertices[i].t[0] = myObject.vertices[i].v[0] + 0.5;
+        myObject.vertices[i].t[1] = myObject.vertices[i].v[1] + 0.5;
 
+    }
 }
 
 
 //// TODO: fill this function to realize cylindrical mapping
 void calcCylindricalMapping(void)
 {
+    for (int i = 0; i < myObject.vertices.size(); i++) {
+        myObject.vertices[i].t[0] = std::atan(myObject.vertices[i].v[0]/ myObject.vertices[i].v[1])/PI + 0.5;
+        myObject.vertices[i].t[1] = myObject.vertices[i].v[2] + 0.5;
 
+    }
 }
 
 
 //// TODO: fill this function to realize sphere mapping
 void calcSphereMapping(void)
 {
+    for (int i = 0; i < myObject.vertices.size(); i++) {
+        myObject.vertices[i].t[0] = std::atan(myObject.vertices[i].v[0] / myObject.vertices[i].v[1]) / PI + 0.5;
+        myObject.vertices[i].t[1] = std::acos(myObject.vertices[i].v[2]/glm::length(glm::vec3(myObject.vertices[i].v[0], myObject.vertices[i].v[1], myObject.vertices[i].v[2])))/PI;
+            
 
+    }
 }
 
 
@@ -688,7 +701,7 @@ int main()
     // load image, create texture and generate mipmaps
     int width, height, nrChannels;
     //unsigned char *data = stbi_load("..\data\texture.png", &width, &height, &nrChannels, 0);
-    unsigned char* data = stbi_load("../data/texture.png", &width, &height, &nrChannels, 0);
+    unsigned char* data = stbi_load("./data/texture.png", &width, &height, &nrChannels, 0);
 
     if (data)
     {
