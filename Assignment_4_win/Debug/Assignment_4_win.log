@@ -1,0 +1,10 @@
+﻿  Image.cpp
+  main.cpp
+D:\_Teaching\_50.017_Graphics_and_Visualisation_Git\Assignment\Assignment_4\Assignment_4_code\Assignment_4_win\src\Group.h(37,26): warning C4018: '<': signed/unsigned mismatch
+  Mesh.cpp
+  SceneParser.cpp
+D:\_Teaching\_50.017_Graphics_and_Visualisation_Git\Assignment\Assignment_4\Assignment_4_code\Assignment_4_win\src\Group.h(37,26): warning C4018: '<': signed/unsigned mismatch
+D:\_Teaching\_50.017_Graphics_and_Visualisation_Git\Assignment\Assignment_4\Assignment_4_code\Assignment_4_win\src\SceneParser.cpp(117,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  texture.cpp
+  Generating Code...
+  Assignment_4_win.vcxproj -> D:\_Teaching\_50.017_Graphics_and_Visualisation_Git\Assignment\Assignment_4\Assignment_4_code\Assignment_4_win\Debug\Assignment_4_win.exe
